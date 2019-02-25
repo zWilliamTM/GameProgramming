@@ -1,7 +1,8 @@
-package com.thecherno.rain.entity.mob;
+package com.thecherno.rain.entity.mob.races;
 
 import java.util.List;
 
+import com.thecherno.rain.entity.mob.Mob;
 import com.thecherno.rain.graphics.AnimatedSprite;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.graphics.Sprite;
@@ -20,6 +21,7 @@ public class Chaser extends Mob {
 	private int ya = 0;
 
 	public Chaser(int x, int y) {
+		super("Chaser");
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = Sprite.dummy;

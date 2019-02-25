@@ -51,6 +51,7 @@ public class Level extends Layer {
 
 	public Level(String path) {
 		loadLevel(path);
+		initNpc();
 		generateLevel();
 	}
 
@@ -64,6 +65,9 @@ public class Level extends Layer {
 	}
 
 	protected void loadLevel(String path) {
+	}
+	
+	protected void initNpc() {
 	}
 
 	public void update() {
@@ -116,6 +120,28 @@ public class Level extends Layer {
 			if (getTile(xt, yt).solid()) solid = true;
 		}
 		return solid;
+	}
+	
+	public boolean mobCollision(int x, int y, int size, int xOffset, int yOffset, String instace) {
+		boolean collider;
+		int left_t = x;
+		int right_t = left_t + size;
+		int top_t = y;
+		int bottom_t = top_t + size;
+			//int xt = (x - c % 2 * size + xOffset) >> 4;
+			//int yt = (y - c / 2 * size + yOffset) >> 4;
+		List<Mob> m =  getPlayers();
+		for (Mob p : m) {
+			if (instace == p.getName()) continue;
+			int left = p.getX() - 8;
+			int right = left + 32 - 2; // SIZE SPRITE
+			int top = p.getY() - 16 - 4;
+			int bottom = top + 32 + 4;
+			collider = ((left_t > left && right_t < right) && 	// collision axis X
+						(top_t > top && bottom_t < bottom));	// collision axis Y
+			if (collider) return true;
+		}
+		return false;
 	}
 	
 	public void setScroll(int xScroll, int yScroll) {

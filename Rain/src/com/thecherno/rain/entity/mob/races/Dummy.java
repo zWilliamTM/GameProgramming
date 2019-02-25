@@ -1,5 +1,6 @@
-package com.thecherno.rain.entity.mob;
+package com.thecherno.rain.entity.mob.races;
 
+import com.thecherno.rain.entity.mob.Mob;
 import com.thecherno.rain.graphics.AnimatedSprite;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.graphics.Sprite;
@@ -19,6 +20,7 @@ public class Dummy extends Mob {
 	private int ya = 0;
 
 	public Dummy(int x, int y) {
+		super("Dummy");
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = Sprite.dummy;

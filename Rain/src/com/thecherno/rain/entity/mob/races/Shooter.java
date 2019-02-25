@@ -1,8 +1,9 @@
-package com.thecherno.rain.entity.mob;
+package com.thecherno.rain.entity.mob.races;
 
 import java.util.List;
 
 import com.thecherno.rain.entity.Entity;
+import com.thecherno.rain.entity.mob.Mob;
 import com.thecherno.rain.graphics.AnimatedSprite;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.graphics.Sprite;
@@ -17,12 +18,13 @@ public class Shooter extends Mob {
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.dummy_right, 32, 32, 3);
 
 	private AnimatedSprite animSprite = down;
-	private int time = 0;
+	private int time = 0, delay_shoot = 15;
 	private int xa = 0, ya = 0;
 
 	private Entity rand = null;
 
 	public Shooter(int x, int y) {
+		super("Shooter");
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = Sprite.dummy;
@@ -61,28 +63,33 @@ public class Shooter extends Mob {
 			walking = false;
 		}
 
-		shootRandom();
-
+		//shootRandom();
+		//shootClosest();
 	}
 
 	private void shootRandom() {
-		List<Entity> entities = level.getEntities(this, 500);
+		List<Entity> entities = level.getEntities(this, 1);
 		entities.add(level.getClientPlayer());
-		if (time % (30 + random.nextInt(91)) == 0) {
+		if (time % (1 + random.nextInt(91)) == 0) {
 			int index = random.nextInt(entities.size());
 			rand = entities.get(index);
 		}
 
-		if (rand != null) {
-			double dx = rand.getX() - x;
-			double dy = rand.getY() - y;
-			double dir = Math.atan2(dy, dx);
-			shoot(x, y, dir);
+		
+		if (delay_shoot == 0) {
+			if (rand != null) {
+				double dx = rand.getX() - x;
+				double dy = rand.getY() - y;
+				double dir = Math.atan2(dy, dx);
+				shoot(x, y, dir);
+			}
+			delay_shoot = 15;
 		}
+		delay_shoot--;
 	}
 
 	private void shootClosest() {
-		List<Entity> entities = level.getEntities(this, 500);
+		List<Entity> entities = level.getEntities(this, 1);
 		entities.add(level.getClientPlayer());
 
 		double min = 0;
@@ -106,6 +113,7 @@ public class Shooter extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
+		screen.drawRect(x - 16, y - 16, 32, 32, 0xffffaaff, true);
 		screen.renderMob(x - 16, y - 16, this);
 	}
 

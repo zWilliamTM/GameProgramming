@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import com.thecherno.rain.entity.mob.Player;
+import com.thecherno.rain.entity.mob.races.Shooter;
 import com.thecherno.rain.events.Event;
 import com.thecherno.rain.events.EventListener;
 import com.thecherno.rain.graphics.Screen;
@@ -71,9 +72,11 @@ public class Game extends Canvas implements Runnable, EventListener {
 		level = Level.spawn;
 		addLayer(level);
 		TileCoordinate playerSpawn = new TileCoordinate(19, 42);
-		player = new Player("Cherno", playerSpawn.x(), playerSpawn.y(), key);
-		level.add(player);
-		level.addPlayer(new NetPlayer());
+		player = new Player("WilliDev", playerSpawn.x(), playerSpawn.y(), key);
+		level.addPlayer(player);
+		//level.addPlayer(new NetPlayer());
+		level.addPlayer(new Shooter(20, 55));
+		level.addPlayer(new Shooter(23, 60));
 		addKeyListener(key);
 
 		Mouse mouse = new Mouse(this);
@@ -164,7 +167,7 @@ public class Game extends Canvas implements Runnable, EventListener {
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println(updates + " ups, " + frames + " fps");
+				//System.out.println(updates + " ups, " + frames + " fps");
 				frame.setTitle(title + "  |  " + updates + " ups, " + frames + " fps");
 				updates = 0;
 				frames = 0;

@@ -8,9 +8,9 @@ public class WizardProjectile extends Projectile {
 
 	public static final int FIRE_RATE = 10; // Higher is slower!
 
-	public WizardProjectile(int x, int y, double dir) {
-		super(x, y, dir);
-		range = 200;
+	public WizardProjectile(int x, int y, double dir, String sender) {
+		super(x, y, dir, sender);
+		range = 100;
 		speed = 4;
 		damage = 20;
 		sprite = Sprite.rotate(Sprite.projectile_arrow, angle);
@@ -21,15 +21,18 @@ public class WizardProjectile extends Projectile {
 	private int time = 0;
 
 	public void update() {
-		if (level.tileCollision((int) (x + nx), (int) (y + ny), 7, 5, 4)) {
+		if (level.tileCollision((int) (x + nx), (int) (y + ny), 7, 5, 4) || // Tile Collision
+			level.mobCollision((int) (x + nx), (int) (y + ny), 7, 5, 4, sender)) { // Player Collision
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
 			remove();
 		}
-		time++;
-		if (time % 2 == 0) {
-			sprite = Sprite.rotate(sprite, Math.PI / 20.0);
-		}
 		
+		/* Animation of rotation.
+		time++;
+		if (time % 8 == 0) {
+			sprite = Sprite.rotate(sprite, Math.PI / 30.0);
+		}
+		*/
 		move();
 	}
 

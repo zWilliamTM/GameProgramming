@@ -34,9 +34,8 @@ import com.thecherno.rain.util.Vector2i;
 
 public class Player extends Mob implements EventListener {
 
-	private String name;
 	private Keyboard input;
-	private Sprite sprite;
+	//private Sprite sprite;
 	private boolean walking = false;
 	
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
@@ -56,15 +55,8 @@ public class Player extends Mob implements EventListener {
 	
 	private boolean shooting = false;
 
-	@Deprecated
-	public Player(String name, Keyboard input) {
-		this.name = name;
-		this.input = input;
-		sprite = Sprite.player_forward;
-	}
-
 	public Player(String name, int x, int y, Keyboard input) {
-		this.name = name;
+		super(name);
 		this.x = x;
 		this.y = y;
 		this.input = input;
@@ -213,6 +205,7 @@ public class Player extends Mob implements EventListener {
 	public void render(Screen screen) {
 		int flip = 0;
 		sprite = animSprite.getSprite();
+		screen.drawRect(x - 16, y - 16, sprite.getWidth(), sprite.getHeight(), 0xffff00ff, true);
 		screen.renderMob(x - 16, y - 16, sprite, flip);
 	}
 

@@ -5,9 +5,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.thecherno.rain.entity.mob.Dummy;
 import com.thecherno.rain.entity.mob.Player;
-import com.thecherno.rain.entity.mob.Shooter;
+import com.thecherno.rain.entity.mob.races.Dummy;
+import com.thecherno.rain.entity.mob.races.Shooter;
 
 public class SpawnLevel extends Level {
 
@@ -26,11 +26,14 @@ public class SpawnLevel extends Level {
 			e.printStackTrace();
 			System.out.println("Exception! Could not load level file!");
 		}
+	}
+	
+	protected void initNpc() {
 		//add(new Chaser(20, 55));
 		//add(new Star(17, 35));
-		add(new Shooter(20, 48));
-		add(new Shooter(20, 55));
-		add(new Dummy(15, 53));
+		//add(new Shooter(20, 48));
+		//add(new Shooter(20, 55));
+		//add(new Dummy(15, 53));
 		
 		for (int i = 0; i < 5; i++) {
 			//add(new Dummy(20, 55));

@@ -1,7 +1,8 @@
-package com.thecherno.rain.entity.mob;
+package com.thecherno.rain.entity.mob.races;
 
 import java.util.List;
 
+import com.thecherno.rain.entity.mob.Mob;
 import com.thecherno.rain.graphics.AnimatedSprite;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.graphics.Sprite;
@@ -23,6 +24,7 @@ public class Star extends Mob {
 	private int time = 0;
 
 	public Star(int x, int y) {
+		super("Star");
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = Sprite.dummy;

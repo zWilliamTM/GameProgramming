@@ -11,7 +11,7 @@ public class RainServer {
 		
 		InetAddress address = null;
 		try {
-			address = InetAddress.getByName("192.168.1.10");
+			address = InetAddress.getByName("127.0.0.1");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}

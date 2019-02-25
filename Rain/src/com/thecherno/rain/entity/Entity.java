@@ -5,6 +5,7 @@ import java.util.Random;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.graphics.Sprite;
 import com.thecherno.rain.level.Level;
+import com.thecherno.rain.util.Vector2i;
 
 public class Entity {
 

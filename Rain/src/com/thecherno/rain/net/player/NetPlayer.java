@@ -6,6 +6,7 @@ import com.thecherno.rain.graphics.Screen;
 public class NetPlayer extends Mob {
 
 	public NetPlayer() {
+		super("NetPlayer");
 		x = 22 * 16;
 		y = 42 * 16; 
 	}

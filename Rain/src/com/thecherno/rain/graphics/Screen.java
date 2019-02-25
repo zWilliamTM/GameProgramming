@@ -2,9 +2,9 @@ package com.thecherno.rain.graphics;
 
 import java.util.Random;
 
-import com.thecherno.rain.entity.mob.Chaser;
 import com.thecherno.rain.entity.mob.Mob;
-import com.thecherno.rain.entity.mob.Star;
+import com.thecherno.rain.entity.mob.races.Chaser;
+import com.thecherno.rain.entity.mob.races.Star;
 import com.thecherno.rain.entity.projectile.Projectile;
 import com.thecherno.rain.level.tile.Tile;
 

@@ -7,6 +7,7 @@ import com.thecherno.rain.graphics.Screen;
 
 public abstract class Mob extends Entity {
 
+	protected String name;
 	protected boolean moving = false;
 	protected boolean walking = false;
 	
@@ -17,6 +18,10 @@ public abstract class Mob extends Entity {
 	}
 
 	protected Direction dir;
+	
+	protected Mob(String name) {
+		this.name = name;
+	}
 
 	public void move(double xa, double ya) {
 		if (xa != 0 && ya != 0) {
@@ -53,7 +58,7 @@ public abstract class Mob extends Entity {
 	public abstract void render(Screen screen);
 
 	protected void shoot(int x, int y, double dir) {
-		Projectile p = new WizardProjectile(x, y, dir);
+		Projectile p = new WizardProjectile(x, y, dir, name);
 		level.add(p);
 	}
 
@@ -69,6 +74,10 @@ public abstract class Mob extends Entity {
 			if (level.getTile(ix, iy).solid()) solid = true;
 		}
 		return solid;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }

@@ -14,15 +14,17 @@ public abstract class Projectile extends Entity {
 	protected double nx, ny;
 	protected double distance;
 	protected double speed, range, damage;
+	protected String sender;
 	
 	protected final Random random = new Random(); 
 
-	public Projectile(int x, int y, double dir) {
+	public Projectile(int x, int y, double dir, String sender) {
 		xOrigin = x;
 		yOrigin = y;
 		angle = dir;
 		this.x = x;
 		this.y = y;
+		this.sender = sender;
 	}
 
 	public Sprite getSprite() {
