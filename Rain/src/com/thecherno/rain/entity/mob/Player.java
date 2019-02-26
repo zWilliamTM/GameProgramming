@@ -38,10 +38,10 @@ public class Player extends Mob implements EventListener {
 	//private Sprite sprite;
 	private boolean walking = false;
 	
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.ss.player_down, 32, 32, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.ss.player_up, 32, 32, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.ss.player_left, 32, 32, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.ss.player_right, 32, 32, 3);
 
 	private AnimatedSprite animSprite = down;
 
@@ -60,7 +60,7 @@ public class Player extends Mob implements EventListener {
 		this.x = x;
 		this.y = y;
 		this.input = input;
-		sprite = Sprite.player_forward;
+		sprite = Sprite.s.player_forward;
 		fireRate = WizardProjectile.FIRE_RATE;
 		
 		ui = Game.getUIManager();

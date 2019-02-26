@@ -20,5 +20,11 @@ public class MathUtils {
 			return max;
 		return value;
 	}
+	
+	public static int calculateTextWidth(int length_text, int font_size) {
+		int width = 0;
+		width = length_text * font_size / 2;
+		return width;
+	}
 
 }

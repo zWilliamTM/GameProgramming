@@ -2,48 +2,54 @@ package com.thecherno.rain.graphics;
 
 public class Sprite {
 
-	public final int SIZE;
+	public int SIZE;
 	private int x, y;
 	private int width, height;
 	public int[] pixels;
 	protected SpriteSheet sheet;
 
-	public static Sprite grass = new Sprite(16, 0, 5, SpriteSheet.tiles);
-	public static Sprite flower = new Sprite(16, 1, 0, SpriteSheet.tiles);
-	public static Sprite rock = new Sprite(16, 2, 0, SpriteSheet.tiles);
-	public static Sprite voidSprite = new Sprite(16, 0x1B87E0);
+	public Sprite grass;
+	public Sprite flower;
+	public Sprite rock;
+	public Sprite voidSprite;
 
 	//Spawn Level Sprites here:
-	public static Sprite spawn_grass = new Sprite(16, 0, 0, SpriteSheet.spawn_level);
-	public static Sprite spawn_hedge = new Sprite(16, 1, 0, SpriteSheet.spawn_level);
-	public static Sprite spawn_water = new Sprite(16, 2, 0, SpriteSheet.spawn_level);
-	public static Sprite spawn_wall1 = new Sprite(16, 0, 1, SpriteSheet.spawn_level);
-	public static Sprite spawn_wall2 = new Sprite(16, 0, 2, SpriteSheet.spawn_level);
-	public static Sprite spawn_floor = new Sprite(16, 1, 1, SpriteSheet.spawn_level);
+	public Sprite spawn_grass;
+	public Sprite spawn_hedge;
+	public Sprite spawn_water;
+	public Sprite spawn_wall1;
+	public Sprite spawn_wall2;
+	public Sprite spawn_floor;
 
 	//Player Sprites here:
-	public static Sprite player_forward = new Sprite(32, 0, 5, SpriteSheet.tiles);
-	public static Sprite player_back = new Sprite(32, 2, 5, SpriteSheet.tiles);
-	public static Sprite player_side = new Sprite(32, 1, 5, SpriteSheet.tiles);
+	public Sprite player_forward;
+	public Sprite player_back;
+	public Sprite player_side;
 
-	public static Sprite player_forward_1 = new Sprite(32, 0, 6, SpriteSheet.tiles);
-	public static Sprite player_forward_2 = new Sprite(32, 0, 7, SpriteSheet.tiles);
+	public Sprite player_forward_1;
+	public Sprite player_forward_2;
 
-	public static Sprite player_side_1 = new Sprite(32, 1, 6, SpriteSheet.tiles);
-	public static Sprite player_side_2 = new Sprite(32, 1, 7, SpriteSheet.tiles);
+	public Sprite player_side_1;
+	public Sprite player_side_2;
 
-	public static Sprite player_back_1 = new Sprite(32, 2, 6, SpriteSheet.tiles);
-	public static Sprite player_back_2 = new Sprite(32, 2, 7, SpriteSheet.tiles);
+	public Sprite player_back_1;
+	public Sprite player_back_2;
 
-	public static Sprite dummy = new Sprite(32, 0, 0, SpriteSheet.dummy_down);
+	public Sprite dummy;
 
 	//Projectile Sprites here:
-	public static Sprite projectile_wizard = new Sprite(16, 0, 0, SpriteSheet.projectile_wizard);
-	public static Sprite projectile_arrow = new Sprite(16, 1, 0, SpriteSheet.projectile_wizard);
+	public Sprite projectile_wizard;
+	public Sprite projectile_arrow;
 
 	// Particles
-	public static Sprite particle_normal = new Sprite(3, 0xAAAAAA);
-	public static Sprite square = new Sprite(2, 0xFF0000);
+	public Sprite particle_normal;
+	public Sprite square;
+	
+	// Global var for statics initialization.
+	public static Sprite s = new Sprite();
+	
+	private Sprite() {
+	}
 
 	protected Sprite(SpriteSheet sheet, int width, int height) {
 		SIZE = (width == height) ? width : -1;
@@ -87,6 +93,46 @@ public class Sprite {
 		for (int i = 0; i < pixels.length; i++) {
 			this.pixels[i] = pixels[i];
 		}
+	}
+	
+	// for statics initializations
+	public void init() {
+		grass = new Sprite(16, 0, 5, SpriteSheet.ss.tiles);
+		flower = new Sprite(16, 1, 0, SpriteSheet.ss.tiles);
+		rock = new Sprite(16, 2, 0, SpriteSheet.ss.tiles);
+		voidSprite = new Sprite(16, 0x1B87E0);
+
+		//Spawn Level Sprites here:
+		spawn_grass = new Sprite(16, 0, 0, SpriteSheet.ss.spawn_level);
+		spawn_hedge = new Sprite(16, 1, 0, SpriteSheet.ss.spawn_level);
+		spawn_water = new Sprite(16, 2, 0, SpriteSheet.ss.spawn_level);
+		spawn_wall1 = new Sprite(16, 0, 1, SpriteSheet.ss.spawn_level);
+		spawn_wall2 = new Sprite(16, 0, 2, SpriteSheet.ss.spawn_level);
+		spawn_floor = new Sprite(16, 1, 1, SpriteSheet.ss.spawn_level);
+
+		//Player Sprites here:
+		player_forward = new Sprite(32, 0, 5, SpriteSheet.ss.tiles);
+		player_back = new Sprite(32, 2, 5, SpriteSheet.ss.tiles);
+		player_side = new Sprite(32, 1, 5, SpriteSheet.ss.tiles);
+
+		player_forward_1 = new Sprite(32, 0, 6, SpriteSheet.ss.tiles);
+		player_forward_2 = new Sprite(32, 0, 7, SpriteSheet.ss.tiles);
+
+		player_side_1 = new Sprite(32, 1, 6, SpriteSheet.ss.tiles);
+		player_side_2 = new Sprite(32, 1, 7, SpriteSheet.ss.tiles);
+
+		player_back_1 = new Sprite(32, 2, 6, SpriteSheet.ss.tiles);
+		player_back_2 = new Sprite(32, 2, 7, SpriteSheet.ss.tiles);
+
+		dummy = new Sprite(32, 0, 0, SpriteSheet.ss.dummy_down);
+
+		//Projectile Sprites here:
+		projectile_wizard = new Sprite(16, 0, 0, SpriteSheet.ss.projectile_wizard);
+		projectile_arrow = new Sprite(16, 1, 0, SpriteSheet.ss.projectile_wizard);
+
+		// Particles
+		particle_normal = new Sprite(3, 0xAAAAAA);
+		square = new Sprite(2, 0xFF0000);
 	}
 	
 	public static Sprite rotate(Sprite sprite, double angle) {

@@ -20,7 +20,7 @@ public class Particle extends Entity {
 		this.xx = x;
 		this.yy = y;
 		this.life = life + (random.nextInt(20) - 10);
-		sprite = Sprite.particle_normal;
+		sprite = Sprite.s.particle_normal;
 
 		this.xa = random.nextGaussian();
 		this.ya = random.nextGaussian();

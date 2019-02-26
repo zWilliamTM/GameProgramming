@@ -23,6 +23,7 @@ import com.thecherno.rain.input.Keyboard;
 import com.thecherno.rain.input.Mouse;
 import com.thecherno.rain.level.Level;
 import com.thecherno.rain.level.TileCoordinate;
+import com.thecherno.rain.menu.MenuManager;
 import com.thecherno.rain.net.Client;
 import com.thecherno.rain.net.player.NetPlayer;
 import com.thecherno.raincloud.serialization.RCDatabase;
@@ -32,25 +33,24 @@ import com.thecherno.raincloud.serialization.RCObject;
 public class Game extends Canvas implements Runnable, EventListener {
 	private static final long serialVersionUID = 1L;
 
-	private static int width = 300 - 80;
-	private static int height = 168;
+	public static int width = 300 - 80;
+	public static int height = 168;
 	private static int scale = 3;
 	public static String title = "Rain";
 
 	private Thread thread;
 	private JFrame frame;
 	private Keyboard key;
-	private Level level;
-	private Player player;
+	
 	private boolean running = false;
+	
+	private MenuManager menuMgr;
 	
 	private static UIManager uiManager;
 
 	private Screen screen;
 	private BufferedImage image;
 	private int[] pixels;
-	
-	private List<Layer> layerStack = new ArrayList<Layer>();
 
 	public Game() {
 		setSize();
@@ -66,34 +66,33 @@ public class Game extends Canvas implements Runnable, EventListener {
 			// TODO: We didn't connect
 		}
 		
-		RCDatabase db = RCDatabase.DeserializeFromFile("res/data/screen.bin");
+		//RCDatabase db = RCDatabase.DeserializeFromFile("res/data/screen.bin");
 		// client.send(db);
 		
-		level = Level.spawn;
-		addLayer(level);
-		TileCoordinate playerSpawn = new TileCoordinate(19, 42);
-		player = new Player("WilliDev", playerSpawn.x(), playerSpawn.y(), key);
-		level.addPlayer(player);
-		//level.addPlayer(new NetPlayer());
-		level.addPlayer(new Shooter(20, 55));
-		level.addPlayer(new Shooter(23, 60));
+		/*
+	
+		*/
+		
+		// NEW MODIFY.
+		menuMgr = new MenuManager(key);
+		
 		addKeyListener(key);
-
+		
 		Mouse mouse = new Mouse(this);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
 		
-		save();
+		//save();
 	}
 	
 	private void setSize() {
-		RCDatabase db = RCDatabase.DeserializeFromFile("res/data/screen.bin");
-		if (db != null) {
-			RCObject obj = db.findObject("Resolution");
-			width = obj.findField("width").getInt();
-			height = obj.findField("height").getInt();
-			scale = obj.findField("scale").getInt();
-		}
+		//RCDatabase db = RCDatabase.DeserializeFromFile("res/data/screen.bin");
+		//if (db != null) {
+		//	RCObject obj = db.findObject("Resolution");
+			//width = obj.findField("width").getInt();
+			//height = obj.findField("height").getInt();
+			//scale = obj.findField("scale").getInt();
+		//}
 		
 		Dimension size = new Dimension(width * scale + 80 * 3, height * scale);
 		setPreferredSize(size);
@@ -124,10 +123,6 @@ public class Game extends Canvas implements Runnable, EventListener {
 	
 	public static UIManager getUIManager() {
 		return uiManager;
-	}
-	
-	public void addLayer(Layer layer) {
-		layerStack.add(layer);
 	}
 
 	public synchronized void start() {
@@ -177,19 +172,21 @@ public class Game extends Canvas implements Runnable, EventListener {
 	}
 	
 	public void onEvent(Event event) {
-		for (int i = layerStack.size() - 1; i >= 0; i--) {
-			layerStack.get(i).onEvent(event);
-		}
+		//for (int i = layerStack.size() - 1; i >= 0; i--) {
+		//	layerStack.get(i).onEvent(event);
+		//}
+		menuMgr.onEvent(event);
 	}
 
 	public void update() {
 		key.update();
 		uiManager.update();
+		menuMgr.update();
 		
 		// Update layers here
-		for (int i = 0; i < layerStack.size(); i++) {
-			layerStack.get(i).update();
-		}
+		//for (int i = 0; i < layerStack.size(); i++) {
+		//	layerStack.get(i).update();
+		//}
 	}
 
 	public void render() {
@@ -200,14 +197,15 @@ public class Game extends Canvas implements Runnable, EventListener {
 		}
 
 		screen.clear();
-		int xScroll = player.getX() - screen.width / 2;
-		int yScroll = player.getY() - screen.height / 2;
-		level.setScroll(xScroll, yScroll);
+		menuMgr.render(screen);
+		//int xScroll = player.getX() - screen.width / 2;
+		//int yScroll = player.getY() - screen.height / 2;
+		//level.setScroll(xScroll, yScroll);
 
 		// Render layers here
-		for (int i = 0; i < layerStack.size(); i++) {
-			layerStack.get(i).render(screen);
-		}
+		//for (int i = 0; i < layerStack.size(); i++) {
+		//	layerStack.get(i).render(screen);
+		//}
 		
 		// font.render(50, 50, -3, "Hey what's up\nguys, My name is\nThe Cherno!", screen);
 		// screen.renderSheet(40, 40, SpriteSheet.player_down, false);

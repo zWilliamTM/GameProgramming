@@ -21,7 +21,8 @@ public class UIProgressBar extends UIComponent {
 	}
 
 	public void setProgress(double progress) {
-		if (progress < 0.0 || progress > 1.0) throw new RangeException(RangeException.BAD_BOUNDARYPOINTS_ERR, "Progress must be between 0.0 and 1.0!");
+		if (progress < 0.0 || progress > 1.0) 
+			throw new RangeException(RangeException.BAD_BOUNDARYPOINTS_ERR, "Progress must be between 0.0 and 1.0!");
 
 		this.progress = progress;
 	}

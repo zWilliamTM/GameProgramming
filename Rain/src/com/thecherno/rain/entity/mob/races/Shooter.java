@@ -12,10 +12,10 @@ import com.thecherno.rain.util.Vector2i;
 
 public class Shooter extends Mob {
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.dummy_left, 32, 32, 3);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.dummy_right, 32, 32, 3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.ss.dummy_down, 32, 32, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.ss.dummy_up, 32, 32, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.ss.dummy_left, 32, 32, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.ss.dummy_right, 32, 32, 3);
 
 	private AnimatedSprite animSprite = down;
 	private int time = 0, delay_shoot = 15;
@@ -27,7 +27,7 @@ public class Shooter extends Mob {
 		super("Shooter");
 		this.x = x << 4;
 		this.y = y << 4;
-		sprite = Sprite.dummy;
+		sprite = Sprite.s.dummy;
 	}
 
 	public void update() {
