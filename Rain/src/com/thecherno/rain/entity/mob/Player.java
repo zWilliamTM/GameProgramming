@@ -196,7 +196,7 @@ public class Player extends Mob implements EventListener {
 	}
 	
 	private void clear() {
-		for (int i = 0; i < level.getProjectiles().size(); i++) {
+		for (int i = 0; i < level.getProjectiles().size(); ++i) {
 			Projectile p = level.getProjectiles().get(i);
 			if (p.isRemoved()) level.getProjectiles().remove(i);
 		}

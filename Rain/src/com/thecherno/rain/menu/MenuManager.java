@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import com.thecherno.rain.Game;
-import com.thecherno.rain.callback.ResizeWindowImpl;
 import com.thecherno.rain.events.Event;
 import com.thecherno.rain.events.EventListener;
 import com.thecherno.rain.graphics.Screen;
@@ -20,8 +19,7 @@ import com.thecherno.rain.menu.state.State;
 import com.thecherno.rain.menu.state.State.ActionButtonType;;
 
 public class MenuManager implements EventListener {
-	
-	public ResizeWindowImpl rwi = new ResizeWindowImpl();
+
 	private Keyboard key;
 	private JFrame frame;
 
@@ -56,7 +54,7 @@ public class MenuManager implements EventListener {
 		states.clear();
 		switch (state) {
 		case LOADING: {
-			resizeFrame(Game.width, Game.height);
+			//resizeFrame(Game.width, Game.height);
 			states.add(new Loading()); 
 		} break;
 		case MAIN_MENU:  {

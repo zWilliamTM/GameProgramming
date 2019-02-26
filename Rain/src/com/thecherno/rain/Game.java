@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import com.thecherno.rain.callback.ResizeWindowImpl;
 import com.thecherno.rain.entity.mob.Player;
 import com.thecherno.rain.entity.mob.races.Shooter;
 import com.thecherno.rain.events.Event;
@@ -95,7 +94,7 @@ public class Game extends Canvas implements Runnable, EventListener {
 			//scale = obj.findField("scale").getInt();
 		//}
 		
-		Dimension size = new Dimension(width * scale + 80 * 3, height * scale);
+		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 		
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
