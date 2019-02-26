@@ -1,9 +1,13 @@
 package com.thecherno.rain.menu;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import com.thecherno.rain.Game;
+import com.thecherno.rain.callback.ResizeWindowImpl;
 import com.thecherno.rain.events.Event;
 import com.thecherno.rain.events.EventListener;
 import com.thecherno.rain.graphics.Screen;
@@ -17,8 +21,9 @@ import com.thecherno.rain.menu.state.State.ActionButtonType;;
 
 public class MenuManager implements EventListener {
 	
-	
+	public ResizeWindowImpl rwi = new ResizeWindowImpl();
 	private Keyboard key;
+	private JFrame frame;
 
 	private List<State> states = new ArrayList<State>();
 	
@@ -31,10 +36,18 @@ public class MenuManager implements EventListener {
 	private boolean ready_state;
 	private State current_state;
 	
-	public MenuManager(Keyboard key) {
+	public MenuManager(JFrame frame, Keyboard key) {
+		this.frame = frame;
 		this.key = key;
 		ready_state = false;
 		changeState(States.LOADING);
+	}
+	
+	private void resizeFrame(int width, int height) {
+		frame.setPreferredSize(new Dimension(width * Game.scale, height * Game.scale));
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.pack();
 	}
 	
 	public void changeState(States state) {
@@ -43,12 +56,15 @@ public class MenuManager implements EventListener {
 		states.clear();
 		switch (state) {
 		case LOADING: {
+			resizeFrame(Game.width, Game.height);
 			states.add(new Loading()); 
 		} break;
 		case MAIN_MENU:  {
+			resizeFrame(Game.width, Game.height);
 			states.add(new MainMenu()); 
 		} break;
 		case INGAME: {
+			resizeFrame(Game.width + 80, Game.height);
 			states.add(new InGame(key)); 
 		} break;
 		}

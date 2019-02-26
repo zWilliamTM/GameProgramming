@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import com.thecherno.rain.callback.ResizeWindowImpl;
 import com.thecherno.rain.entity.mob.Player;
 import com.thecherno.rain.entity.mob.races.Shooter;
 import com.thecherno.rain.events.Event;
@@ -35,7 +36,7 @@ public class Game extends Canvas implements Runnable, EventListener {
 
 	public static int width = 300 - 80;
 	public static int height = 168;
-	private static int scale = 3;
+	public static int scale = 3;
 	public static String title = "Rain";
 
 	private Thread thread;
@@ -74,7 +75,7 @@ public class Game extends Canvas implements Runnable, EventListener {
 		*/
 		
 		// NEW MODIFY.
-		menuMgr = new MenuManager(key);
+		menuMgr = new MenuManager(frame, key);
 		
 		addKeyListener(key);
 		
