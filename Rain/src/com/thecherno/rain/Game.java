@@ -36,6 +36,13 @@ public class Game extends Canvas implements Runnable, EventListener {
 	public static int width = 300 - 80;
 	public static int height = 168;
 	public static int scale = 3;
+	
+	public static final int g_width = width * scale;
+	public static final int g_height = height * scale;
+	
+	public static final int all_width = (width + 80) * scale;
+	public static final int all_height = height * scale;
+	
 	public static String title = "Rain";
 
 	private Thread thread;
@@ -48,14 +55,17 @@ public class Game extends Canvas implements Runnable, EventListener {
 	
 	private static UIManager uiManager;
 
-	private Screen screen;
-	private BufferedImage image;
-	private int[] pixels;
+	private Screen screeng, screenall;
+	private BufferedImage image_game;
+	private BufferedImage image_not_game;
+	private int[] pixels_game;
+	private int[] pixels_not_game;
 
 	public Game() {
 		setSize();
 
-		screen = new Screen(width, height);
+		screeng = new Screen(width, height);
+		screenall = new Screen(width + 80, height);
 		uiManager = new UIManager();
 		frame = new JFrame();
 		key = new Keyboard();
@@ -94,11 +104,14 @@ public class Game extends Canvas implements Runnable, EventListener {
 			//scale = obj.findField("scale").getInt();
 		//}
 		
-		Dimension size = new Dimension(width * scale, height * scale);
+		Dimension size = new Dimension(all_width, all_height);
 		setPreferredSize(size);
 		
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+		image_game = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		pixels_game = ((DataBufferInt) image_game.getRaster().getDataBuffer()).getData();
+		
+		image_not_game = new BufferedImage(width + 80, height, BufferedImage.TYPE_INT_RGB);
+		pixels_not_game = ((DataBufferInt) image_not_game.getRaster().getDataBuffer()).getData();
 	}
 	
 	private void save() {
@@ -195,9 +208,13 @@ public class Game extends Canvas implements Runnable, EventListener {
 			createBufferStrategy(3);
 			return;
 		}
-
-		screen.clear();
-		menuMgr.render(screen);
+		
+		if (menuMgr.getIdState() != MenuManager.States.INGAME)
+			screenall.clear();
+		else
+			screeng.clear();
+		
+		menuMgr.render(screeng, screenall);
 		//int xScroll = player.getX() - screen.width / 2;
 		//int yScroll = player.getY() - screen.height / 2;
 		//level.setScroll(xScroll, yScroll);
@@ -209,14 +226,27 @@ public class Game extends Canvas implements Runnable, EventListener {
 		
 		// font.render(50, 50, -3, "Hey what's up\nguys, My name is\nThe Cherno!", screen);
 		// screen.renderSheet(40, 40, SpriteSheet.player_down, false);
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = screen.pixels[i];
-		}
+		
+		// Game
+		if (menuMgr.getIdState() != MenuManager.States.INGAME)
+			for (int i = 0; i < pixels_not_game.length; ++i) {
+				pixels_not_game[i] = screenall.pixels[i];
+			}
+		else	
+			for (int i = 0; i < pixels_game.length; i++) {
+				pixels_game[i] = screeng.pixels[i];
+			}
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(new Color(0xff00ff));
 		g.fillRect(0,  0, getWidth(), getHeight());
-		g.drawImage(image, 0, 0, width * scale, height * scale, null);
+		if (menuMgr.getIdState() != MenuManager.States.INGAME) {
+			g.drawImage(image_not_game, 0, 0, all_width, all_height, null);
+
+		} else {
+			g.drawImage(image_game, 0, 0, g_width, g_height, null);
+		}
 		uiManager.render(g);
+			
 		// g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64);
 		// if (Mouse.getButton() != -1) g.drawString("Button: " + Mouse.getButton(), 80, 80);
 		g.dispose();

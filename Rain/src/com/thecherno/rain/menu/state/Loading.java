@@ -33,8 +33,8 @@ public class Loading extends State implements Runnable, EventListener {
 	@Override
 	public void init() {
 		// Loading background
-		int w = Game.getWindowWidth();
-		int h = Game.getWindowHeight();
+		int w = Game.all_width;
+		int h = Game.all_height;
 		background = new Sprite(w, h, 0x1B87E0); // test
 		progressBar = new UIProgressBar(new Vector2i(w / 2 - (P_WIDTH / 2), h / 2 - 20),
 										new Vector2i(P_WIDTH, 40));

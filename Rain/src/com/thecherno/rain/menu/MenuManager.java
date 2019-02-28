@@ -33,12 +33,17 @@ public class MenuManager implements EventListener {
 	
 	private boolean ready_state;
 	private State current_state;
+	private States current_id_state;
 	
 	public MenuManager(JFrame frame, Keyboard key) {
 		this.frame = frame;
 		this.key = key;
 		ready_state = false;
 		changeState(States.LOADING);
+	}
+	
+	public States getIdState() {
+		return current_id_state;
 	}
 	
 	private void resizeFrame(int width, int height) {
@@ -58,14 +63,15 @@ public class MenuManager implements EventListener {
 			states.add(new Loading()); 
 		} break;
 		case MAIN_MENU:  {
-			resizeFrame(Game.width, Game.height);
+			//resizeFrame(Game.width, Game.height);
 			states.add(new MainMenu()); 
 		} break;
 		case INGAME: {
-			resizeFrame(Game.width + 80, Game.height);
+			//resizeFrame(Game.width + 80, Game.height);
 			states.add(new InGame(key)); 
 		} break;
 		}
+		current_id_state = state;
 		loadState(state);
 		ready_state = true;
 	}
@@ -102,9 +108,12 @@ public class MenuManager implements EventListener {
 		checkStates();
 	}
 	
-	public void render(Screen screen) {
+	public void render(Screen screeng, Screen screenall) {
 		if (ready_state)
-			current_state.render(screen);
+			if (current_id_state != States.INGAME)
+				current_state.render(screenall);
+			else
+				current_state.render(screeng);
 	}
 
 	@Override

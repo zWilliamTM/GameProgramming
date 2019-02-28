@@ -28,8 +28,8 @@ public class MainMenu extends State implements EventListener {
 	
 	@Override
 	public void init() {
-		int w = Game.getWindowWidth();
-		int h = Game.getWindowHeight();
+		int w = Game.all_width;
+		int h = Game.all_height;
 		int sx = 200;
 		int sy = 300;
 		
