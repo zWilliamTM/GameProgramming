@@ -7,6 +7,7 @@ import com.thecherno.rain.entity.mob.races.Chaser;
 import com.thecherno.rain.entity.mob.races.Star;
 import com.thecherno.rain.entity.projectile.Projectile;
 import com.thecherno.rain.level.tile.Tile;
+import com.thecherno.rain.level.view.MiniLevelView;
 
 public class Screen {
 
@@ -148,6 +149,22 @@ public class Screen {
 				if (xa < 0) xa = 0;
 				int col = sprite.pixels[xs + ys * 32];
 				if (col != ALPHA_COL) pixels[xa + ya * width] = col;
+			}
+		}
+	}
+	
+	public void renderMinimap(int xp, int yp, MiniLevelView minimap) {
+		//xp -= xOffset;
+		//yp -= yOffset;
+		int w = minimap.minimap.getWidth(), h = minimap.minimap.getHeight();
+		for (int y = 0; y < h; ++y) {
+			//int ya = y + yp;
+			for (int x = 0; x < w; ++x) {
+				//int xa = x + xp;
+				//if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
+				//if (xa < 0) xa = 0;
+				int col = minimap.pixels[x + y * w];
+				if (col != ALPHA_COL) pixels[x + y * width] = col;
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import com.thecherno.rain.entity.Entity;
 import com.thecherno.rain.entity.projectile.Projectile;
 import com.thecherno.rain.entity.projectile.WizardProjectile;
 import com.thecherno.rain.graphics.Screen;
+import com.thecherno.rain.util.Vector2i;
 
 public abstract class Mob extends Entity {
 
@@ -78,6 +79,10 @@ public abstract class Mob extends Entity {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public Vector2i getPosition() {
+		return new Vector2i(x, y);
 	}
 
 }

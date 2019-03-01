@@ -45,6 +45,9 @@ public class Sprite {
 	public Sprite particle_normal;
 	public Sprite square;
 	
+	// Mini map
+	public Sprite minimap_1;
+	
 	// Global var for statics initialization.
 	public static Sprite s = new Sprite();
 	
@@ -133,6 +136,9 @@ public class Sprite {
 		// Particles
 		particle_normal = new Sprite(3, 0xAAAAAA);
 		square = new Sprite(2, 0xFF0000);
+		
+		// Level minimap
+		minimap_1 = new Sprite(SpriteSheet.ss.minimap_default.pixels, 40, 75);
 	}
 	
 	public static Sprite rotate(Sprite sprite, double angle) {

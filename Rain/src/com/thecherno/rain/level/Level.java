@@ -15,6 +15,7 @@ import com.thecherno.rain.events.Event;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.graphics.layers.Layer;
 import com.thecherno.rain.level.tile.Tile;
+import com.thecherno.rain.level.view.MiniLevelView;
 import com.thecherno.rain.util.Vector2i;
 
 public class Level extends Layer {
@@ -25,6 +26,8 @@ public class Level extends Layer {
 	protected int tile_size;
 	
 	private int xScroll, yScroll;
+	
+	private MiniLevelView mlv = new MiniLevelView();
 
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
@@ -83,6 +86,9 @@ public class Level extends Layer {
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).update();
 		}
+		
+		mlv.update(players);
+		
 		remove();
 	}
 	
@@ -160,6 +166,7 @@ public class Level extends Layer {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
+		
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}
@@ -173,7 +180,7 @@ public class Level extends Layer {
 			players.get(i).render(screen);
 		}
 		
-		
+		mlv.render(screen);
 	}
 
 	public void add(Entity e) {

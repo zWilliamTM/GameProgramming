@@ -29,6 +29,9 @@ public class SpriteSheet {
 	public SpriteSheet dummy_left;
 	public SpriteSheet dummy_right;
 	
+	// Minimaps
+	public SpriteSheet minimap_default;
+	
 	public static SpriteSheet ss = new SpriteSheet();
 
 	private Sprite[] sprites;
@@ -102,6 +105,8 @@ public class SpriteSheet {
 		dummy_up 	= new SpriteSheet(dummy, 1, 0, 1, 3, 32);
 		dummy_left 	= new SpriteSheet(dummy, 2, 0, 1, 3, 32);
 		dummy_right = new SpriteSheet(dummy, 3, 0, 1, 3, 32);
+		
+		minimap_default = new SpriteSheet("/levels/spawn.png", 40, 75);
 	}
 
 	public Sprite[] getSprites() {
