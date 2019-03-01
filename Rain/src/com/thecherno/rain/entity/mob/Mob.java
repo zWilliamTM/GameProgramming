@@ -65,6 +65,7 @@ public abstract class Mob extends Entity {
 
 	private boolean collision(double xa, double ya) {
 		boolean solid = false;
+		/*
 		for (int c = 0; c < 4; ++c) {
 			double xt = ((x + xa) - c % 2 * 15) / 16;
 			double yt = ((y + ya) - c / 2 * 15) / 16;
@@ -73,7 +74,11 @@ public abstract class Mob extends Entity {
 			if (c % 2 == 0) ix = (int) Math.floor(xt);
 			if (c / 2 == 0) iy = (int) Math.floor(yt);
 			solid = level.getTile(ix, iy).solid();
-		}
+		} */
+		int ix = x >> 4;
+		int iy = y >> 4;
+		int xp =(int) Math.ceil(xa), yp = (int) Math.ceil(ya);
+		solid = level.getTile(ix + xp, iy + yp).solid();
 		return solid;
 	}
 	

@@ -37,8 +37,7 @@ public class MiniLevelView {
 			for (int x = 0; x < width; ++x) {
 				int color = minimap.pixels[x + y * width];;
 				for (Mob p : players) {
-					int xa = (p.getX() >> 4), ya = (p.getY() >> 4);
-					if (xa == x && ya == y) {
+					if ((p.getX() >> 4) == x && (p.getY() >> 4) == y) {
 						if (p.getName().equals("WilliDev")) color = 0xffffff;
 						else if (p.getName().equals("Shooter")) color = 0x1B87E0;
 					}
