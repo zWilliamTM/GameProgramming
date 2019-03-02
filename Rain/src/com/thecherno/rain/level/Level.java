@@ -87,7 +87,7 @@ public class Level extends Layer {
 			players.get(i).update();
 		}
 		
-		mlv.update(players);
+		mlv.update(players.get(0), players);
 		
 		remove();
 	}

@@ -156,14 +156,14 @@ public class Screen {
 	public void renderMinimap(int xp, int yp, MiniLevelView minimap) {
 		//xp -= xOffset;
 		//yp -= yOffset;
-		int w = minimap.minimap.getWidth(), h = minimap.minimap.getHeight();
-		for (int y = 0; y < h; ++y) {
+		//int w = minimap.minimap.getWidth(), h = minimap.minimap.getHeight();
+		for (int y = 0; y < minimap.height; ++y) {
 			//int ya = y + yp;
-			for (int x = 0; x < w; ++x) {
+			for (int x = 0; x < minimap.width; ++x) {
 				//int xa = x + xp;
 				//if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
 				//if (xa < 0) xa = 0;
-				int col = minimap.pixels[x + y * w];
+				int col = minimap.pixels[x + y * minimap.width];
 				if (col != ALPHA_COL) pixels[x + y * width] = col;
 			}
 		}
