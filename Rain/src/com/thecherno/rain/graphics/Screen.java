@@ -158,13 +158,13 @@ public class Screen {
 		//yp -= yOffset;
 		//int w = minimap.minimap.getWidth(), h = minimap.minimap.getHeight();
 		for (int y = 0; y < minimap.height; ++y) {
-			//int ya = y + yp;
+			int ya = y + yp;
 			for (int x = 0; x < minimap.width; ++x) {
-				//int xa = x + xp;
+				int xa = x + xp;
 				//if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
 				//if (xa < 0) xa = 0;
 				int col = minimap.pixels[x + y * minimap.width];
-				if (col != ALPHA_COL) pixels[x + y * width] = col;
+				if (col != ALPHA_COL) pixels[xa + ya * width] = col;
 			}
 		}
 	}

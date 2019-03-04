@@ -17,7 +17,7 @@ public class MiniLevelView {
 	public MiniLevelView() {
 		iwidth = minimap.getWidth();
 		iheight = minimap.getHeight();
-		width = 240 >> 4;
+		width = 220 >> 4;
 		height = 168 >> 4;
 		pixels = new int[width * height];
 	}
@@ -82,7 +82,7 @@ public class MiniLevelView {
 	}
 	
 	public void render(Screen screen) {
-		screen.renderMinimap(0, 0, this);
+		screen.renderMinimap(200, 10, this);
 	}
 	
 }
